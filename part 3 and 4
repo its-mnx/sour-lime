@@ -1,0 +1,501 @@
+# ==================================================
+# Part 3: Python Classes and Objects
+# ==================================================
+
+# --------------------------------------
+# 1. Customer Class
+# --------------------------------------
+class Customer:
+    """
+    Represents a customer who places delivery orders.
+    Attributes:
+        __name (str): Customer's full name.
+        __email (str): Customer's email address.
+        __address (str): Customer's physical address.
+        __phone_number (str): Customer's contact phone number.
+        __customer_id (str): Unique identifier for the customer.
+    """
+    def __init__(self, name, email, address, phone_number, customer_id):
+        """
+        Initialize a Customer object with the provided details.
+        Args:
+            name (str): Customer's full name.
+            email (str): Customer's email address.
+            address (str): Customer's physical address.
+            phone_number (str): Customer's contact phone number.
+            customer_id (str): Unique identifier for the customer.
+        """
+        self.__name = name
+        self.__email = email
+        self.__address = address
+        self.__phone_number = phone_number
+        self.__customer_id = customer_id
+
+    # Getters
+    def get_name(self):
+        """Get the customer's name."""
+        return self.__name
+
+    def get_email(self):
+        """Get the customer's email address."""
+        return self.__email
+
+    def get_address(self):
+        """Get the customer's physical address."""
+        return self.__address
+
+    def get_phone_number(self):
+        """Get the customer's phone number."""
+        return self.__phone_number
+
+    def get_customer_id(self):
+        """Get the customer's unique identifier."""
+        return self.__customer_id
+
+    # Setters
+    def set_name(self, name):
+        """
+        Set the customer's name.
+        Args:
+            name (str): New name for the customer.
+        """
+        self.__name = name
+
+    def set_email(self, email):
+        """
+        Set the customer's email address.
+        Args:
+            email (str): New email address for the customer.
+        """
+        self.__email = email
+
+    def set_address(self, address):
+        """
+        Set the customer's physical address.
+        Args:
+            address (str): New address for the customer.
+        """
+        self.__address = address
+
+    def set_phone_number(self, phone_number):
+        """
+        Set the customer's phone number.
+        Args:
+            phone_number (str): New phone number for the customer.
+        """
+        self.__phone_number = phone_number
+
+    def set_customer_id(self, customer_id):
+        """
+        Set the customer's unique identifier.
+        Args:
+            customer_id (str): New unique identifier for the customer.
+        """
+        self.__customer_id = customer_id
+
+    # Additional Functions
+    def validate_details(self):
+        """
+        Validate customer details to ensure all required fields are properly set.
+        Returns:
+            bool: True if all details are valid, False otherwise.
+        """
+        # Check if all fields are non-empty
+        if not self.__name or not self.__email or not self.__address or not self.__phone_number:
+            return False
+        # Add more validation logic (e.g., email format, phone number format)
+        return True
+
+
+# --------------------------------------
+# 2. Item Class
+# --------------------------------------
+class Item:
+    """
+    Represents a product or service being delivered.
+    Attributes:
+        __item_code (str): Unique identifier for the item.
+        __description (str): Description of the item.
+        __quantity (int): Number of units ordered.
+        __unit_price (float): Price per unit.
+        __weight (float): Weight of the item in kg.
+    """
+    def __init__(self, item_code, description, quantity, unit_price, weight):
+        """
+        Initialize an Item object with the provided details.
+        Args:
+            item_code (str): Unique identifier for the item.
+            description (str): Description of the item.
+            quantity (int): Number of units ordered.
+            unit_price (float): Price per unit.
+            weight (float): Weight of the item in kg.
+        """
+        self.__item_code = item_code
+        self.__description = description
+        self.__quantity = quantity
+        self.__unit_price = unit_price
+        self.__weight = weight
+
+    # Getters
+    def get_item_code(self):
+        """Get the item's unique code."""
+        return self.__item_code
+
+    def get_description(self):
+        """Get the item's description."""
+        return self.__description
+
+    def get_quantity(self):
+        """Get the item quantity."""
+        return self.__quantity
+
+    def get_unit_price(self):
+        """Get the item's unit price."""
+        return self.__unit_price
+
+    def get_weight(self):
+        """Get the item's weight."""
+        return self.__weight
+
+    # Setters
+    def set_item_code(self, item_code):
+        """
+        Set the item code.
+        Args:
+            item_code (str): New unique identifier for the item.
+        """
+        self.__item_code = item_code
+
+    def set_description(self, description):
+        """
+        Set the item description.
+        Args:
+            description (str): New description for the item.
+        """
+        self.__description = description
+
+    def set_quantity(self, quantity):
+        """
+        Set the item quantity.
+        Args:
+            quantity (int): New quantity for the item.
+        """
+        if quantity > 0:
+            self.__quantity = quantity
+        else:
+            raise ValueError("Quantity must be a positive number.")
+
+    def set_unit_price(self, unit_price):
+        """
+        Set the item's unit price.
+        Args:
+            unit_price (float): New unit price for the item.
+        """
+        if unit_price > 0:
+            self.__unit_price = unit_price
+        else:
+            raise ValueError("Unit price must be a positive number.")
+
+    def set_weight(self, weight):
+        """
+        Set the item's weight.
+        Args:
+            weight (float): New weight for the item.
+        """
+        if weight > 0:
+            self.__weight = weight
+        else:
+            raise ValueError("Weight must be a positive number.")
+
+    # Additional Functions
+    def get_total_price(self):
+        """
+        Calculate the total price for this item (quantity × unit price).
+        Returns:
+            float: Total price.
+        """
+        return self.__quantity * self.__unit_price
+
+
+# --------------------------------------
+# 3. DeliveryOrder Class
+# --------------------------------------
+class DeliveryOrder:
+    """
+    Represents a delivery order placed by a customer.
+    Attributes:
+        __order_number (str): Unique identifier for the order.
+        __customer (Customer): Customer who placed the order.
+        __items (list): List of Item objects in the order.
+        __total_price (float): Total price of the order.
+        __delivery_status (str): Current status of the delivery.
+    """
+    def __init__(self, order_number, customer, items, total_price, delivery_status):
+        """
+        Initialize a DeliveryOrder object with the provided details.
+        Args:
+            order_number (str): Unique identifier for the order.
+            customer (Customer): Customer who placed the order.
+            items (list): List of Item objects in the order.
+            total_price (float): Total price of the order.
+            delivery_status (str): Current status of the delivery.
+        """
+        self.__order_number = order_number
+        self.__customer = customer
+        self.__items = items
+        self.__total_price = total_price
+        self.__delivery_status = delivery_status
+
+    # Getters
+    def get_order_number(self):
+        """Get the order number."""
+        return self.__order_number
+
+    def get_customer(self):
+        """Get the customer who placed the order."""
+        return self.__customer
+
+    def get_items(self):
+        """Get the list of items in the order."""
+        return self.__items
+
+    def get_total_price(self):
+        """Get the total price of the order."""
+        return self.__total_price
+
+    def get_delivery_status(self):
+        """Get the current delivery status."""
+        return self.__delivery_status
+
+    # Setters
+    def set_order_number(self, order_number):
+        """
+        Set the order number.
+        Args:
+            order_number (str): New unique identifier for the order.
+        """
+        self.__order_number = order_number
+
+    def set_customer(self, customer):
+        """
+        Set the customer for this order.
+        Args:
+            customer (Customer): New customer for the order.
+        """
+        self.__customer = customer
+
+    def set_items(self, items):
+        """
+        Set the list of items for this order.
+        Args:
+            items (list): New list of Item objects for the order.
+        """
+        self.__items = items
+
+    def set_total_price(self, total_price):
+        """
+        Set the total price for this order.
+        Args:
+            total_price (float): New total price for the order.
+        """
+        if total_price > 0:
+            self.__total_price = total_price
+        else:
+            raise ValueError("Total price must be a positive number.")
+
+    def set_delivery_status(self, delivery_status):
+        """
+        Set the delivery status.
+        Args:
+            delivery_status (str): New delivery status for the order.
+        """
+        self.__delivery_status = delivery_status
+
+    # Additional Functions
+    def calculate_taxes(self):
+        """
+        Calculate taxes for the order.
+        Returns:
+            float: Tax amount.
+        """
+        return self.__total_price * 0.05  # 5% tax
+
+
+# --------------------------------------
+# 4. DeliveryNote Class
+# --------------------------------------
+class DeliveryNote:
+    """
+    Represents a delivery note generated for a customer.
+    Attributes:
+        __delivery_order (DeliveryOrder): Associated delivery order.
+        __delivery_date (str): Date of delivery.
+        __delivery_method (str): Method of delivery (e.g., Courier).
+        __package_dimensions (str): Dimensions of the package.
+        __total_weight (float): Total weight of the package in kg.
+    """
+    def __init__(self, delivery_order, delivery_date, delivery_method, package_dimensions, total_weight):
+        """
+        Initialize a DeliveryNote object with the provided details.
+        Args:
+            delivery_order (DeliveryOrder): Associated delivery order.
+            delivery_date (str): Date of delivery.
+            delivery_method (str): Method of delivery (e.g., Courier).
+            package_dimensions (str): Dimensions of the package.
+            total_weight (float): Total weight of the package in kg.
+        """
+        self.__delivery_order = delivery_order
+        self.__delivery_date = delivery_date
+        self.__delivery_method = delivery_method
+        self.__package_dimensions = package_dimensions
+        self.__total_weight = total_weight
+
+    # Getters
+    def get_delivery_order(self):
+        """Get the associated delivery order."""
+        return self.__delivery_order
+
+    def get_delivery_date(self):
+        """Get the delivery date."""
+        return self.__delivery_date
+
+    def get_delivery_method(self):
+        """Get the delivery method."""
+        return self.__delivery_method
+
+    def get_package_dimensions(self):
+        """Get the package dimensions."""
+        return self.__package_dimensions
+
+    def get_total_weight(self):
+        """Get the total weight of the package."""
+        return self.__total_weight
+
+    # Setters
+    def set_delivery_order(self, delivery_order):
+        """
+        Set the associated delivery order.
+        Args:
+            delivery_order (DeliveryOrder): New delivery order for the note.
+        """
+        self.__delivery_order = delivery_order
+
+    def set_delivery_date(self, delivery_date):
+        """
+        Set the delivery date.
+        Args:
+            delivery_date (str): New delivery date for the note.
+        """
+        self.__delivery_date = delivery_date
+
+    def set_delivery_method(self, delivery_method):
+        """
+        Set the delivery method.
+        Args:
+            delivery_method (str): New delivery method for the note.
+        """
+        self.__delivery_method = delivery_method
+
+    def set_package_dimensions(self, package_dimensions):
+        """
+        Set the package dimensions.
+        Args:
+            package_dimensions (str): New package dimensions for the note.
+        """
+        self.__package_dimensions = package_dimensions
+
+    def set_total_weight(self, total_weight):
+        """
+        Set the total weight of the package.
+        Args:
+            total_weight (float): New total weight for the note.
+        """
+        if total_weight > 0:
+            self.__total_weight = total_weight
+        else:
+            raise ValueError("Total weight must be a positive number.")
+
+    # Additional Functions
+    def generate_note(self):
+        """
+        Generate a formatted delivery note.
+        Returns:
+            str: Formatted delivery note text.
+        """
+        # Get order details
+        order = self.__delivery_order
+        customer = order.get_customer()
+        items = order.get_items()
+
+        # Create the delivery note
+        note = f"""
+Delivery Note
+=============
+Thank you for using our delivery service! Please print your delivery receipt and present it upon receiving your items.
+
+Recipient Details:
+-----------------
+Name: {customer.get_name()}
+Contact: {customer.get_email()}
+Delivery Address: {customer.get_address()}
+
+Delivery Information:
+--------------------
+Order Number: {order.get_order_number()}
+Reference Number: DN-2025-001
+Delivery Date: {self.__delivery_date}
+Delivery Method: {self.__delivery_method}
+
+Package Dimensions:
+------------------
+Total Weight: {self.__total_weight} kg
+
+Summary of Items Delivered:
+-------------------------
+Item Code  Description                Quantity  Unit Price (AED)  Total Price (AED)
+"""
+        # Add item details
+        for item in items:
+            note += f"{item.get_item_code():<10}  {item.get_description():<25}  {item.get_quantity():<9}  {item.get_unit_price():<16.2f}  {item.get_total_price():<15.2f}\n"
+
+        # Add totals
+        subtotal = order.get_total_price()
+        taxes = order.calculate_taxes()  # Use the calculate_taxes method
+        total = subtotal + taxes
+
+        note += f"""
+Subtotal: AED {subtotal:.2f}
+Taxes and Fees: AED {taxes:.2f}
+Total Charges: AED {total:.2f}
+"""
+        return note
+
+
+# Step 1: Create 2 customers
+customer1 = Customer("Rashid AlHashemi", "rashid.alhashemi@example.com", "45 Knowledge Avenue, Dubai, UAE", "+971501234567", "CUST12345")
+customer2 = Customer("Faiza AlMarzooqi", "faiza.almarzooqi@example.com", "12 Palm Street, Abu Dhabi, UAE", "+971502345678", "CUST67890")
+
+# Step 2: Create items for the first order
+item1 = Item("ITM001", "Wireless Keyboard", 1, 100.0, 0.5)
+item2 = Item("ITM002", "Wireless Mouse & Pad Set", 1, 75.0, 0.2)
+item3 = Item("ITM003", "Laptop Cooling Pad", 1, 120.0, 0.8)
+item4 = Item("ITM004", "Camera Lock", 3, 15.0, 0.1)
+
+# Step 3: Create items for the second order
+item5 = Item("ITM005", "USB-C Hub", 2, 50.0, 0.3)
+item6 = Item("ITM006", "External Hard Drive", 1, 200.0, 1.0)
+
+# Step 4: Create 2 delivery orders
+order1 = DeliveryOrder("DEL123456789", customer1, [item1, item2, item3, item4], 270.0, "Pending")  # First order
+order2 = DeliveryOrder("DEL987654321", customer2, [item5, item6], 300.0, "Out for Delivery")  # Second order
+
+# Step 5: Create 2 delivery notes
+delivery_note1 = DeliveryNote(order1, "January 25, 2025", "Courier", "Standard", 7.0)  # First delivery note
+delivery_note2 = DeliveryNote(order2, "February 1, 2025", "Express", "Large", 5.0)  # Second delivery note
+
+# Step 6: Generate and display the delivery notes
+print("Delivery Note 1:")
+print(delivery_note1.generate_note())
+
+print("\nDelivery Note 2:")
+print(delivery_note2.generate_note())

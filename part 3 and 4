@@ -322,7 +322,261 @@ class DeliveryOrder:
 
 
 # --------------------------------------
-# 4. DeliveryNote Class
+# 4. DeliveryPerson Class
+# --------------------------------------
+class DeliveryPerson:
+    """
+    Represents a person responsible for delivering orders.
+    Attributes:
+        __name (str): The name of the delivery person.
+        __contact (str): The contact information of the delivery person.
+        __employee_id (str): A unique identifier for the delivery person.
+        __vehicle_type (str): The type of vehicle used for delivery.
+        __availability (bool): Whether the delivery person is available for deliveries.
+        __delivery_area (str): The area the delivery person covers.
+    """
+    def __init__(self, name, contact, employee_id, vehicle_type, availability, delivery_area):
+        """
+        Initialize a DeliveryPerson object with the provided details.
+        Args:
+            name (str): The name of the delivery person.
+            contact (str): The contact information of the delivery person.
+            employee_id (str): A unique identifier for the delivery person.
+            vehicle_type (str): The type of vehicle used for delivery.
+            availability (bool): Whether the delivery person is available for deliveries.
+            delivery_area (str): The area the delivery person covers.
+        """
+        self.__name = name
+        self.__contact = contact
+        self.__employee_id = employee_id
+        self.__vehicle_type = vehicle_type
+        self.__availability = availability
+        self.__delivery_area = delivery_area
+
+    # Getters
+    def get_name(self):
+        """Get the delivery person's name."""
+        return self.__name
+
+    def get_contact(self):
+        """Get the delivery person's contact information."""
+        return self.__contact
+
+    def get_employee_id(self):
+        """Get the delivery person's employee ID."""
+        return self.__employee_id
+
+    def get_vehicle_type(self):
+        """Get the type of vehicle used for delivery."""
+        return self.__vehicle_type
+
+    def get_availability(self):
+        """Get the delivery person's availability."""
+        return self.__availability
+
+    def get_delivery_area(self):
+        """Get the delivery area."""
+        return self.__delivery_area
+
+    # Setters
+    def set_name(self, name):
+        """
+        Set the delivery person's name.
+        Args:
+            name (str): New name for the delivery person.
+        """
+        self.__name = name
+
+    def set_contact(self, contact):
+        """
+        Set the delivery person's contact information.
+        Args:
+            contact (str): New contact information for the delivery person.
+        """
+        self.__contact = contact
+
+    def set_employee_id(self, employee_id):
+        """
+        Set the delivery person's employee ID.
+        Args:
+            employee_id (str): New employee ID for the delivery person.
+        """
+        self.__employee_id = employee_id
+
+    def set_vehicle_type(self, vehicle_type):
+        """
+        Set the type of vehicle used for delivery.
+        Args:
+            vehicle_type (str): New vehicle type for the delivery person.
+        """
+        self.__vehicle_type = vehicle_type
+
+    def set_availability(self, availability):
+        """
+        Set the delivery person's availability.
+        Args:
+            availability (bool): New availability status for the delivery person.
+        """
+        self.__availability = availability
+
+    def set_delivery_area(self, delivery_area):
+        """
+        Set the delivery area.
+        Args:
+            delivery_area (str): New delivery area for the delivery person.
+        """
+        self.__delivery_area = delivery_area
+
+    # Additional Functions
+    def update_delivery_status(self, order, new_status):
+        """
+        Update the status of a delivery order.
+        Args:
+            order (DeliveryOrder): The order to update.
+            new_status (str): The new delivery status.
+        """
+        order.set_delivery_status(new_status)
+        self.notify_customer(order.get_customer(), f"Your order status has been updated to: {new_status}")
+
+    def notify_customer(self, customer, message):
+        """
+        Send a notification to the customer.
+        Args:
+            customer (Customer): The customer to notify.
+            message (str): The message to send.
+        """
+        print(f"Notification sent to {customer.get_name()} ({customer.get_email()}): {message}")
+
+
+# --------------------------------------
+# 5. System Class
+# --------------------------------------
+class System:
+    """
+    Represents the delivery management system itself.
+    Attributes:
+        __tax_rate (float): The tax rate applied to orders.
+        __notification_method (str): The method used to notify customers ("Email" or "SMS").
+        __service_area (str): The area where the delivery service is available.
+        __admin_contact (str): The contact information of the admin.
+        __system_version (str): The version of the delivery management system.
+        __delivery_fee (float): The fee charged for delivery.
+    """
+    def __init__(self, tax_rate, notification_method, service_area, admin_contact, system_version, delivery_fee):
+        """
+        Initialize a System object with the provided details.
+        Args:
+            tax_rate (float): The tax rate applied to orders.
+            notification_method (str): The method used to notify customers.
+            service_area (str): The area where the delivery service is available.
+            admin_contact (str): The contact information of the admin.
+            system_version (str): The version of the delivery management system.
+            delivery_fee (float): The fee charged for delivery.
+        """
+        self.__tax_rate = tax_rate
+        self.__notification_method = notification_method
+        self.__service_area = service_area
+        self.__admin_contact = admin_contact
+        self.__system_version = system_version
+        self.__delivery_fee = delivery_fee
+
+    # Getters
+    def get_tax_rate(self):
+        """Get the tax rate."""
+        return self.__tax_rate
+
+    def get_notification_method(self):
+        """Get the notification method."""
+        return self.__notification_method
+
+    def get_service_area(self):
+        """Get the service area."""
+        return self.__service_area
+
+    def get_admin_contact(self):
+        """Get the admin's contact information."""
+        return self.__admin_contact
+
+    def get_system_version(self):
+        """Get the system version."""
+        return self.__system_version
+
+    def get_delivery_fee(self):
+        """Get the delivery fee."""
+        return self.__delivery_fee
+
+    # Setters
+    def set_tax_rate(self, tax_rate):
+        """
+        Set the tax rate.
+        Args:
+            tax_rate (float): New tax rate.
+        """
+        self.__tax_rate = tax_rate
+
+    def set_notification_method(self, notification_method):
+        """
+        Set the notification method.
+        Args:
+            notification_method (str): New notification method.
+        """
+        self.__notification_method = notification_method
+
+    def set_service_area(self, service_area):
+        """
+        Set the service area.
+        Args:
+            service_area (str): New service area.
+        """
+        self.__service_area = service_area
+
+    def set_admin_contact(self, admin_contact):
+        """
+        Set the admin's contact information.
+        Args:
+            admin_contact (str): New admin contact information.
+        """
+        self.__admin_contact = admin_contact
+
+    def set_system_version(self, system_version):
+        """
+        Set the system version.
+        Args:
+            system_version (str): New system version.
+        """
+        self.__system_version = system_version
+
+    def set_delivery_fee(self, delivery_fee):
+        """
+        Set the delivery fee.
+        Args:
+            delivery_fee (float): New delivery fee.
+        """
+        self.__delivery_fee = delivery_fee
+
+    # Additional Functions
+    def validate_customer_details(self, customer):
+        """
+        Validate customer details.
+        Args:
+            customer (Customer): The customer whose details need to be validated.
+        Returns:
+            bool: True if details are valid, False otherwise.
+        """
+        return customer.validate_details()
+
+    def notify_customer(self, customer, message):
+        """
+        Send a notification to the customer.
+        Args:
+            customer (Customer): The customer to notify.
+            message (str): The message to send.
+        """
+        print(f"Notification sent to {customer.get_name()} ({customer.get_email()}): {message}")
+
+
+# --------------------------------------
+# 6. DeliveryNote Class
 # --------------------------------------
 class DeliveryNote:
     """
@@ -490,13 +744,29 @@ item6 = Item("ITM006", "External Hard Drive", 1, 200.0, 1.0)
 order1 = DeliveryOrder("DEL123456789", customer1, [item1, item2, item3, item4], 270.0, "Pending")  # First order
 order2 = DeliveryOrder("DEL987654321", customer2, [item5, item6], 300.0, "Out for Delivery")  # Second order
 
-# Step 5: Create 2 delivery notes
+# Step 5: Create a DeliveryPerson object
+delivery_person1 = DeliveryPerson("Hessa Khalid", "+971 50 987 6543", "EMP12345", "Motorcycle", True, "Dubai")
+
+# Step 6: Create a System object
+system1 = System(0.05, "Email", "Dubai", "admin@delivery.com", "v1.0", 10.0)
+
+# Step 7: Create 2 delivery notes
 delivery_note1 = DeliveryNote(order1, "January 25, 2025", "Courier", "30x20x10 cm", 7.0)  # First delivery note
 delivery_note2 = DeliveryNote(order2, "February 1, 2025", "Express", "40x30x15 cm", 5.0)  # Second delivery note
 
-# Step 6: Generate and display the delivery notes
+# Step 8: Generate and display the delivery notes
 print("Delivery Note 1:")
 print(delivery_note1.generate_note())
 
+# Validate customer details and send notifications
+if system1.validate_customer_details(customer1):
+    delivery_person1.update_delivery_status(order1, "Out for Delivery")
+    system1.notify_customer(customer1, "Your delivery note has been generated.")
+
 print("\nDelivery Note 2:")
 print(delivery_note2.generate_note())
+
+# Validate customer details and send notifications
+if system1.validate_customer_details(customer2):
+    delivery_person1.update_delivery_status(order2, "Delivered")
+    system1.notify_customer(customer2, "Your delivery note has been generated.")

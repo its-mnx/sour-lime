@@ -448,6 +448,7 @@ Delivery Method: {self.__delivery_method}
 
 Package Dimensions:
 ------------------
+Dimensions: {self.__package_dimensions}
 Total Weight: {self.__total_weight} kg
 
 Summary of Items Delivered:
@@ -490,8 +491,8 @@ order1 = DeliveryOrder("DEL123456789", customer1, [item1, item2, item3, item4], 
 order2 = DeliveryOrder("DEL987654321", customer2, [item5, item6], 300.0, "Out for Delivery")  # Second order
 
 # Step 5: Create 2 delivery notes
-delivery_note1 = DeliveryNote(order1, "January 25, 2025", "Courier", "Standard", 7.0)  # First delivery note
-delivery_note2 = DeliveryNote(order2, "February 1, 2025", "Express", "Large", 5.0)  # Second delivery note
+delivery_note1 = DeliveryNote(order1, "January 25, 2025", "Courier", "30x20x10 cm", 7.0)  # First delivery note
+delivery_note2 = DeliveryNote(order2, "February 1, 2025", "Express", "40x30x15 cm", 5.0)  # Second delivery note
 
 # Step 6: Generate and display the delivery notes
 print("Delivery Note 1:")
